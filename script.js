@@ -1,70 +1,78 @@
-// Hero Section Transition to Navbar
-window.onscroll = function() {
-    const hero = document.getElementById('hero');
-    const logo = document.getElementById('logo');
-    const heroLogo = document.getElementById('hero-logo');
-    if (window.scrollY > 50) {
-      hero.classList.add('scrolled');
-      logo.textContent = heroLogo.textContent;
-    } else {
-      hero.classList.remove('scrolled');
-      logo.textContent = '';
-    }
-  };
-  
-  // Scroll to Projects Section on Button Click
-  document.getElementById('scroll-button').addEventListener('click', function() {
-    const projects = document.getElementById('projects');
-    window.scrollTo({
-      top: projects.offsetTop,
-      behavior: 'smooth'
-    });
-  });
-  
-  // Smooth Scrolling Function
-  function smoothScroll(target, duration) {
-    const targetPosition = target.getBoundingClientRect().top + window.scrollY;
-    const startPosition = window.scrollY;
-    let startTime = null;
-  
-    function animation(currentTime) {
-      if (startTime === null) startTime = currentTime;
-      const timeElapsed = currentTime - startTime;
-      const run = ease(timeElapsed, startPosition, targetPosition - startPosition, duration);
-      window.scrollTo(0, run);
-      if (timeElapsed < duration) requestAnimationFrame(animation);
-    }
-  
-    function ease(t, b, c, d) {
-      t /= d / 2;
-      if (t < 1) return c / 2 * t * t * t + b;
-      t -= 2;
-      return c / 2 * (t * t * t + 2) + b;
-    }
-  
-    requestAnimationFrame(animation);
+const hamMenu = document.querySelector('.ham-menu');
+const offScreenMenu = document.querySelector('.off-screen-menu');
+
+hamMenu.addEventListener('click', ()=>{
+    hamMenu.classList.toggle('active');
+    offScreenMenu.classList.toggle('active');
+})
+
+const cursor = document.getElementById('custom-cursor');
+let mouseX = 0;
+let mouseY = 0;
+let cursorX = 0;
+let cursorY = 0;
+const speed = 0.2;
+let cursorVisible = false;
+
+function animate() {
+  const distX = mouseX - cursorX;
+  const distY = mouseY - cursorY;
+
+  cursorX += distX * speed;
+  cursorY += distY * speed;
+
+  cursor.style.left = cursorX + 'px';
+  cursor.style.top = cursorY + 'px';
+
+  requestAnimationFrame(animate);
+}
+
+function handleMouseMove(e) {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+
+  if (!cursorVisible) {
+    cursor.style.visibility = 'visible';
+    cursorVisible = true;
+    animate();
   }
-  
-  document.getElementById('scroll-button').addEventListener('click', function() {
-    smoothScroll(document.getElementById('projects'), 3000);
-  });
+}
+
+// Mobile device check
+if (window.matchMedia('(pointer: coarse)').matches) {
+  // Mobile device, don't show custom cursor
+  cursor.style.display = 'none';
+} else {
+  // Desktop device, add mousemove listener
+  document.addEventListener('mousemove', handleMouseMove);
+}
+
+//intro bars animation
+gsap.to(".bar", 1.5,{
+  delay: 0.5,
+  height: 0,
+  stagger: {
+      amount: 0.5,
+  },
+  ease: "power4.inOut",
+})
   
   // Ripple Effect Background Change and Open Project
-  function openProject(url, event) {
-    const color = event.currentTarget.getAttribute('data-color');
-    document.body.style.setProperty('--ripple-color', color);
-    const ripple = document.createElement('span');
-    const rect = event.currentTarget.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    const x = event.clientX - rect.left - size / 2;
-    const y = event.clientY - rect.top - size / 2;
-    ripple.style.width = ripple.style.height = `${size}px`;
-    ripple.style.left = `${x}px`;
-    ripple.style.top = `${y}px`;
-    ripple.classList.add('ripple');
-    event.currentTarget.appendChild(ripple);
-    setTimeout(() => {
-      window.location.href = url;
-    }, 600);
-  }
+  // function openProject(url, event) {
+  //   const color = event.currentTarget.getAttribute('data-color');
+  //   document.body.style.setProperty('--ripple-color', color);
+  //   const ripple = document.createElement('span');
+  //   const rect = event.currentTarget.getBoundingClientRect();
+  //   const size = Math.max(rect.width, rect.height);
+  //   const x = event.clientX - rect.left - size / 2;
+  //   const y = event.clientY - rect.top - size / 2;
+  //   ripple.style.width = ripple.style.height = `${size}px`;
+  //   ripple.style.left = `${x}px`;
+  //   ripple.style.top = `${y}px`;
+  //   ripple.classList.add('ripple');
+  //   event.currentTarget.appendChild(ripple);
+  //   setTimeout(() => {
+  //     window.location.href = url;
+  //   }, 600);
+  // }
   
