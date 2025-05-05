@@ -9,7 +9,7 @@
   color: #F2F0EF;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  /* cursor: none; */
+  cursor: none;
 }
 
 #custom-cursor {
