@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>portfolio</title>
+    <title>Portfolio | Subhodeep Chakraborty</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,86 +22,102 @@
   </div>
   <div id="custom-cursor"></div>
 
-  <!-- navbar -->
-    <header>
-      <nav class="navbar">
-        <a href="#" class="nav-branding"><img src="assets\logo.svg" alt="Chkra Logo" height="56vh" class="nav-logo"></a>
-        <ul class="nav-menu">
-          <li class="nav-item"><a href="#" class="nav-link">WORK</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">ABOUT</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">CONTACT</a></li>
-        </ul>
-        <div class="hamburger">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </div>
-      </nav>
-    </header>
-    <!-- hero section -->
-    <section class="hero">
-      <div class="hero-image">
-        <img src="assets\photo-main.jpg" alt="Hero Image">
+  <header id="main-header" class="noise">
+    <nav class="navbar">
+      <a href="#" class="nav-branding"><img src="assets/logo.svg" alt="Chkra Logo" class="nav-logo"></a>
+      <ul class="nav-menu noise">
+        <li class="nav-item"><a href="#work-section" class="nav-link">WORK ↗</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">ABOUT ↗</a></li>
+      </ul>
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
       </div>
-      <div class="hero-content">
-        <div class="intro">
-          <h1>Hi, I'm </h1>
-          <img src="assets\logo.svg" alt="Chkra Logo">
-        </div>
-        <h2>/Subhodeep Chakraborty, if we're being formal</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur mollitia ipsam veniam consequuntur tempore itaque voluptatibus molestiae molestias sed voluptatem reiciendis animi ex, minus ad quo amet tempora nesciunt dolore.</p>
+    </nav>
+  </header>
+
+  <section class="hero noise">
+    <div class="hero-content">
+      <div class="intro">
+        <h1>Hi, I'm</h1>
+        <img src="assets/logo.svg" alt="Chkra Logo" class="hero-logo">
       </div>
-    </section>
-    <div class="container">
-      <a data-scroll href="#">
+      <h2>Subhodeep Chakraborty, a brand designer from India.</h2>
+      <p>I help businesses find out who they are, and channel it visually via their brand, creating identities that are natural and timeless.</p>
+      <a data-scroll href="#work-section" class="scroll-arrow">
         <div class="arrow"></div>
       </a>
     </div>
+    
+    <a data-scroll href="#work-section" class="circular-text-container">
+      <svg viewBox="0 0 200 200" class="rotating-svg">
+        <path id="textCircle" d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0" fill="none" />
+          <text>
+            <textPath href="#textCircle" startOffset="0%">SCROLL TO WORK • SCROLL TO WORK • </textPath>
+          </text>
+      </svg>
+      <div class="center-arrow"></div>
+    </a>
+  </section>
 
-    <!-- work section -->
-     <h2 style="color: #1a1a1a; margin: 2rem;">WORK</h2>
-    <div class="grid">
+  <h2 id="work-section" class="section-title">WORK</h2>
+  <div class="grid">
+    <a href="./assets/indicurate/indicurate.html" class="splash-trigger" data-bg="#EDE7D4" style="text-decoration: none;">
       <div class="card" style="background-image: url('assets/indicurate/indicurate-cover.png')">
-        <img src="assets/indicurate/indicurate.svg" alt="brand logo">
+        <img src="assets/indicurate/indicurate-white.svg" alt="brand logo">
         <h2>Indicurate</h2>
         <p>Brand Identity + Web Design & Development + Social Media</p>
       </div>
-      <div class="card" style="background-image: url('assets/cult-stickers/cult\ stickers.jpg')">
-        <img src="assets/cult-stickers/cult stickers.svg" alt="brand logo">
+    </a>
+    <a href="#" data-bg="red" class="splash-trigger" style="text-decoration: none;">
+      <div class="card" style="background-image: url('assets/cult-stickers/cult-stickers.jpg')">
+        <img src="assets/cult-stickers/cult-stickers.svg" alt="brand logo">
         <h2>Cult Stickers</h2>
         <p>Brand Identity + Social Media</p>
       </div>
-      <div class="card" style="background-image: url('assets/fynl-lnd/fynl\ lnd.jpg')">
-        <img src="assets/fynl-lnd/fynl lnd.svg" alt="brand logo">
+    </a>
+    <a href="#" data-bg="black" class="splash-trigger" style="text-decoration: none;">
+      <div class="card" style="background-image: url('assets/fynl-lnd/fynl-lnd.jpg')">
+        <img src="assets/fynl-lnd/fynl-lnd.svg" alt="brand logo">
         <h2>Fynl Lnd</h2>
         <p>Concept Brand Identity</p>
       </div>
+    </a>
+    <a href="#" data-bg="bisque" class="splash-trigger" style="text-decoration: none;">
       <div class="card" style="background-image: url('assets/makeshift/makeshift.jpg')">
         <img src="assets/makeshift/makeshift.svg" alt="brand logo">
         <h2>Makeshift</h2>
         <p>Concept Brand Identity</p>
       </div>
+    </a>
+    <a href="#" data-bg="black" class="splash-trigger" style="text-decoration: none;">
       <div class="card" style="background-image: url('assets/urbanite/urbanite.jpg')">
         <img src="assets/urbanite/urbanite.svg" alt="brand logo">
         <h2>Urbanite</h2>
         <p>Concept Brand Identity</p>
       </div>
-      <div class="card" style="background-image: url('assets/serenity-fest/serenity\ fest.jpg')">
-        <img src="assets/serenity-fest/serenity fest.png" alt="brand logo">
+    </a>
+    <a href="#" data-bg="silver" class="splash-trigger" style="text-decoration: none;">
+      <div class="card" style="background-image: url('assets/serenity-fest/serenity-fest.jpg')">
+        <img src="assets/serenity-fest/serenity-fest.png" alt="brand logo">
         <h2>Serenity Fest</h2>
         <p>Concept Brand Identity</p>
       </div>
+    </a>
+  </div>
+
+  <footer class="footer">
+    <div class="social-icons">
+      <a href="#"><img src="assets/socials/Behance.png" alt="Behance"></a>
+      <a href="#"><img src="assets/socials/Instagram.png" alt="Instagram"></a>
+      <a href="#"><img src="assets/socials/LinkedIn.png" alt="LinkedIn"></a>
+      <a href="#"><img src="assets/socials/Mail.png" alt="Mail"></a>
     </div>
-    <footer class="footer">
-      <div class="social-icons">
-        <a href="#"><img src="assets/socials/Behance.png" alt="Twitter"></a>
-        <a href="#"><img src="assets/socials/Instagram.png" alt="GitHub"></a>
-        <a href="#"><img src="assets/socials/LinkedIn.png" alt="LinkedIn"></a>
-        <a href="#"><img src="assets/socials/Mail.png" alt="Instagram"></a>
-      </div>
-      <p>© 2025 Subhodeep Chakraborty</p>
-    </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/gsap.min.js"></script>
-    <script src="script.js"></script>
+    <p>© 2025 Subhodeep Chakraborty</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/gsap.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
