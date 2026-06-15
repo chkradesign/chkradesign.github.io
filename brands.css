@@ -1,0 +1,261 @@
+/* ==========================================================================
+   BRANDS.CSS - Brutalist Grid Framework
+   ========================================================================== */
+
+/* Core Brutalist Resets */
+body {
+  background-color: var(--brand-bg);
+  color: var(--brand-text);
+  font-family: var(--brand-font-body), sans-serif;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, .brand-heading {
+  font-family: var(--brand-font-heading), serif;
+  color: var(--brand-text);
+  font-weight: 400;
+  margin: 0;
+}
+
+p, a, li, span, div {
+  color: var(--brand-text);
+}
+
+/* ---------------------------------------------------
+   NAVBAR RE-STYLING (Overriding global style.css)
+   --------------------------------------------------- */
+.brand-header {
+  background-color: var(--brand-bg) !important;
+  border-bottom: 1px solid var(--brand-text) !important;
+  box-shadow: none !important;
+}
+
+/* Fix unreadable white links */
+.brand-header a.nav-link {
+  color: var(--brand-text) !important;
+}
+
+.brand-header .nav-link::after {
+  background-color: var(--brand-text) !important;
+}
+
+.brand-header .bar {
+  background-color: var(--brand-text) !important;
+}
+
+/* ---------------------------------------------------
+   THE BRUTALIST 2-COLUMN GRID ENGINE
+   --------------------------------------------------- */
+.brutalist-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100vw;
+}
+
+/* Base Box rules: All boxes draw their right and bottom borders */
+.b-cell {
+  border-right: 1px solid var(--brand-text);
+  border-bottom: 1px solid var(--brand-text);
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  height: 75vh;
+  position: relative;
+}
+
+/* Utility to remove padding for split-boxes (Colors, Typo, Mockups) */
+.b-cell.no-pad {
+  padding: 0;
+}
+
+/* Utility to make a box span the whole page */
+.span-full {
+  grid-column: span 2;
+}
+
+/* ---------------------------------------------------
+   SPECIFIC BOX COMPONENTS
+   --------------------------------------------------- */
+
+/* Image Box */
+.b-media-frame {
+  height: 100%;
+  width: 100%;
+  place-self: center;
+  overflow: hidden;
+  padding: var(--frame-padding, 0%);
+}
+.b-media-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: var(--img-fit, cover);
+}
+.b-media-frame svg {
+    width: 100%;
+    height: 100%;
+    object-fit: var(--img-fit, cover);
+}
+
+/*Section Titles */
+.section-title{
+    height: 2.8vh;
+    color: var(--brand-text);
+    background-color: var(--brand-bg);
+    display: flex;
+    align-items: center;
+    padding: 1.6rem 1.2rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--brand-text) 40%, transparent);
+    font-family: var(--brand-font-body);
+    text-transform: uppercase;
+    font-size: 0.92rem;
+    font-weight: bolder;
+}
+
+/* Box: Intro */
+.cell-intro {
+  justify-content: center;
+}
+.intro-meta {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--brand-text);
+  padding-bottom: 0.6rem;
+  display: inline-block;
+}
+.intro-title {
+  font-size: clamp(4rem, 8vw, 8rem);
+  margin: 1.4rem 0;
+}
+.intro-desc {
+  font-size: 0.8rem;
+  opacity: 85%;
+  max-width: 85%;
+}
+.wordmark{
+    height: fit-content;
+    width: fit-content;
+}
+
+/* Box: Colors (Flex Column Layout) */
+.color-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 3rem;
+}
+.color-pane h3 {
+    font-size: 1.6rem;
+    padding-bottom: 0.4rem;
+    font-weight: bolder;
+    opacity: 90%;
+    letter-spacing: 2%;
+}
+.color-pane p{
+    font-size: 0.72rem;
+    opacity: 50%;
+    letter-spacing: 12%;
+    padding: 1.2vh 0;
+    font-weight: 600;
+}
+
+/* Box: Typography (Flex Row Split) */
+.type-split {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  width: 100%;
+}
+.type-pane {
+  flex: 1;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.type-pane p{
+    font-size: 0.6rem;
+    letter-spacing: 0.1rem;
+    font-weight: bolder;
+    opacity: 70%;
+    padding-bottom:0.4rem;
+}
+.type-heading{
+    font-size: 9.8vh;
+    margin-bottom: 6vh;
+    font-weight: 400;
+}
+.type-subheading{
+    font-size: 5.4vh;
+    font-weight: bolder;
+    margin-bottom: 6vh;
+    letter-spacing: 0.02rem;
+}
+.type-body{
+    width: 90%;
+    font-size: 2vh;
+    line-height: 1.2;
+    letter-spacing: 4%;
+    font-weight: normal;
+    opacity: 70%;
+}
+
+/* Final Box: Home CTA */
+.footer-cta {
+  border-bottom: none;
+  height: 2vh;
+  justify-content: center;
+  align-items: center;
+  padding: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: bold;
+  font-size: 0.8rem;
+  background-color: var(--brand-text);
+  color: var(--brand-bg);
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+.footer-cta:hover{
+    opacity: 0.9;
+}
+
+/* Brand Footer Customization */
+.brand-footer {
+  background-color: transparent !important;
+}
+
+/* ---------------------------------------------------
+   MOBILE OPTIMIZATION
+   --------------------------------------------------- */
+@media screen and (max-width: 900px) {
+  .logo{
+    width: 70%;
+  }
+  .brutalist-grid {
+    grid-template-columns: 1fr;
+  }
+  .b-cell {
+    height: 50vh;
+  }
+  .span-full {
+    grid-column: span 1;
+  }
+  .type-heading{
+    font-size: 6vh;
+  }
+  .type-subheading{
+    font-size: 4vh;
+  }
+  .type-body{
+    font-size: 1.8vh;
+  }
+  .b-cell:has(.type-pane){
+    height: fit-content;
+  }
+  .footer-cta{
+    height: 5vh;
+  }
+}
