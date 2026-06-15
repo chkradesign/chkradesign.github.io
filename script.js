@@ -75,3 +75,40 @@ gsap.to(".line", 1.5,{
       });
     }
   })
+
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Dynamic Splash Transition Logic ---
+    const splashTriggers = document.querySelectorAll('.splash-trigger');
+
+    splashTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            // Prevent default navigation initially
+            e.preventDefault();
+            
+            const targetUrl = trigger.getAttribute('href');
+            // Get the color from data-bg, default to white if not set
+            const targetColor = trigger.getAttribute('data-bg') || '#F2F0EF';
+
+            // Create splash element dynamically
+            const splash = document.createElement('div');
+            splash.classList.add('splash-transition');
+            splash.style.backgroundColor = targetColor;
+            
+            // Set position based on click
+            splash.style.left = `${e.clientX}px`;
+            splash.style.top = `${e.clientY}px`;
+            
+            document.body.appendChild(splash);
+
+            // Expand the circle
+            gsap.to(splash, {
+                scale: 250, 
+                duration: 0.8,
+                ease: "power3.inOut",
+                onComplete: () => {
+                    window.location.href = targetUrl;
+                }
+            });
+        });
+    });
+});
