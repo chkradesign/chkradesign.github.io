@@ -394,6 +394,10 @@ a {
     gap: 0;
     flex-direction: column;
     background-color: #1a1a1a;
+    background-image: url('assets/slate.jpg');
+    background-size: cover;
+    background-blend-mode: hard-light;
+    filter: brightness(110%) contrast(100%);
     width: 100%;
     text-align: center;
     transition: 0.3s ease-in-out;
