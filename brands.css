@@ -243,6 +243,11 @@ p, a, li, span, div {
   .span-full {
     grid-column: span 1;
   }
+  .nav-menu {
+    background-image: none;
+    background-blend-mode: normal;
+    filter: none;
+  }
   .type-heading{
     font-size: 6vh;
   }
