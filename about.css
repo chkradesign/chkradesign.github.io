@@ -1,0 +1,334 @@
+/* ==========================================================================
+   ABOUT.CSS — "Documentation" layout
+   The hero, header, section-title, footer, and contact block are reused
+   directly from style.css / the previous about build. This file covers:
+   a restrained hero override, a spec-panel section (deliberately mirroring
+   how the Indicurate template documents a brand — Focus/Based/Working
+   With/Availability, next to a contained photo instead of a full-bleed
+   mark), the philosophy paragraph, and the process list.
+   ========================================================================== */
+
+/* ---------------------------------------------------
+   HERO — restrained, not another homepage-scale statement
+   --------------------------------------------------- */
+.hero.about-hero {
+  height: auto;
+  min-height: 44vh;
+  padding: 10vh 4vw;
+}
+
+.about-name {
+  font-size: clamp(2.4rem, 4.2vw, 3.6rem);
+  font-weight: 700;
+  margin-bottom: 0.9rem;
+}
+
+.about-role {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+.about-tag {
+  margin-top: 1.8rem;
+  font-size: 1rem;
+  font-weight: 300;
+  font-style: italic;
+  opacity: 0.5;
+}
+
+/* ---------------------------------------------------
+   SPEC ROW — photo (contained, documentation-style, not a
+   full-bleed lifestyle shot) beside a Focus/Based/Working
+   With/Availability panel
+   --------------------------------------------------- */
+.spec-row {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 6vw;
+  align-items: start;
+  padding: 6vh 4vw 0 4vw;
+}
+
+.about-photo-frame {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid rgba(26, 26, 26, 0.15);
+}
+
+.about-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(12%) contrast(105%);
+}
+
+.meta-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.meta-row {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 1rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.14);
+  font-size: 0.92rem;
+}
+
+.meta-row:last-child {
+  border-bottom: none;
+}
+
+.meta-key {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  opacity: 0.5;
+}
+
+.meta-val {
+  color: #1a1a1a;
+  font-weight: 400;
+}
+
+/* ---------------------------------------------------
+   PHILOSOPHY — one paragraph, stated once
+   --------------------------------------------------- */
+.about-philosophy {
+  padding: 6vh 4vw 8vh 4vw;
+}
+
+.about-philosophy p {
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #1a1a1a;
+  opacity: 0.85;
+  max-width: 68ch;
+}
+
+/* ---------------------------------------------------
+   PROCESS
+   --------------------------------------------------- */
+.process-list {
+  padding: 2vh 4vw 10vh 4vw;
+}
+
+.process-item {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 2rem;
+  padding: 2.2rem 0;
+  border-top: 1px solid rgba(26, 26, 26, 0.14);
+}
+
+.process-item:last-child {
+  border-bottom: 1px solid rgba(26, 26, 26, 0.14);
+}
+
+.process-number {
+  color: #1a1a1a;
+  font-size: 1rem;
+  font-weight: 700;
+  opacity: 0.35;
+}
+
+.process-title {
+  color: #1a1a1a;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.process-desc {
+  color: #1a1a1a;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.65;
+  opacity: 0.7;
+  max-width: 58ch;
+}
+
+/* ---------------------------------------------------
+   CONTACT
+   --------------------------------------------------- */
+.contact-block {
+  padding: 2vh 4vw 12vh 4vw;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 6vw;
+}
+
+.contact-info-item {
+  margin-bottom: 2.6rem;
+}
+
+.contact-info-label {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  opacity: 0.5;
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.contact-info-value {
+  color: #1a1a1a;
+  font-size: 1.3rem;
+  font-weight: 400;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.contact-info-value:hover {
+  border-bottom-color: #1a1a1a;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.form-field label {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  opacity: 0.55;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  font-family: "Outfit", sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: #1a1a1a;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.3);
+  padding: 0.7rem 0;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: rgba(26, 26, 26, 0.35);
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-bottom-color: #1a1a1a;
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 8rem;
+}
+
+.form-submit {
+  align-self: flex-start;
+  margin-top: 0.6rem;
+  padding: 1rem 2.4rem;
+  background-color: #1a1a1a;
+  color: #f2f0ef;
+  border: none;
+  border-radius: 100px;
+  font-family: "Outfit", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: none;
+  transition: opacity 0.25s ease;
+}
+
+.form-submit:hover {
+  opacity: 0.85;
+}
+
+.form-note {
+  font-size: 0.85rem;
+  color: #1a1a1a;
+  opacity: 0.5;
+  margin-top: -0.6rem;
+}
+
+/* ============================================================== */
+/* MOBILE                                                          */
+/* ============================================================== */
+@media screen and (max-width: 900px) {
+  .hero.about-hero {
+    min-height: auto;
+    padding: 14vh 6vw 6vh 6vw;
+  }
+
+  .spec-row {
+    grid-template-columns: 1fr;
+    gap: 4vh;
+    padding: 4vh 6vw 0 6vw;
+  }
+
+  .about-photo-frame {
+    max-width: 60vw;
+  }
+
+  .meta-row {
+    grid-template-columns: 6.5rem 1fr;
+  }
+
+  .about-philosophy {
+    padding: 4vh 6vw 6vh 6vw;
+  }
+
+  .process-list {
+    padding: 2vh 6vw 6vh 6vw;
+  }
+
+  .process-item {
+    grid-template-columns: 3rem 1fr;
+    gap: 1.2rem;
+  }
+
+  .contact-block {
+    padding: 2vh 6vw 8vh 6vw;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}

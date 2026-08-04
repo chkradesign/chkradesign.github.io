@@ -1,8 +1,21 @@
 /* ==========================================================================
-   BRANDS.CSS - Brutalist Grid Framework
+   BRANDS.CSS — Brand Presentation Template
+   Structural rules only. Every brand's own file (see indicurate.css) sets
+   colors, fonts, and swatch values — this file defines the walk-through:
+   one composed "plate" per screen, a quiet top rule between them, and
+   almost nothing else. No section headings, no decorative flourishes.
    ========================================================================== */
 
-/* Core Brutalist Resets */
+:root {
+  /* One "screen" = the viewport minus the sticky 16vh nav that stays
+     pinned above every plate as you scroll. Every plate targets this
+     same figure so the whole page moves in one consistent rhythm. */
+  --screen: calc(100vh - 22vh);
+  --rule: color-mix(in srgb, var(--brand-text) 16%, transparent);
+  --plate-x: 7vw;
+  --plate-y: 8vh;
+}
+
 body {
   background-color: var(--brand-bg);
   color: var(--brand-text);
@@ -10,257 +23,445 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, .brand-heading {
-  font-family: var(--brand-font-heading), serif;
+h1,
+h2,
+h3,
+h4,
+.brand-heading {
+  font-family: var(--brand-font-heading), sans-serif;
   color: var(--brand-text);
   font-weight: 400;
   margin: 0;
 }
 
-p, a, li, span, div {
+p,
+a,
+li,
+span,
+div {
   color: var(--brand-text);
 }
 
+.show-desktop {
+  display: block !important;
+}
+.show-mobile {
+  display: none !important;
+}
+
 /* ---------------------------------------------------
-   NAVBAR RE-STYLING (Overriding global style.css)
+   NAVBAR (overrides the dark global header for brand pages)
    --------------------------------------------------- */
 .brand-header {
   background-color: var(--brand-bg) !important;
-  border-bottom: 1px solid var(--brand-text) !important;
+  border-bottom: 1px solid var(--rule) !important;
   box-shadow: none !important;
 }
-
-/* Fix unreadable white links */
 .brand-header a.nav-link {
   color: var(--brand-text) !important;
 }
-
 .brand-header .nav-link::after {
   background-color: var(--brand-text) !important;
 }
-
 .brand-header .bar {
   background-color: var(--brand-text) !important;
 }
 
 /* ---------------------------------------------------
-   THE BRUTALIST 2-COLUMN GRID ENGINE
+   PLATE SYSTEM
+   Every section is a full-width "plate" targeting one screen. A plate is
+   either padded (text/documentation content) or full-bleed (imagery that
+   should fill the frame edge to edge).
    --------------------------------------------------- */
-.brutalist-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.brand-plates {
+  display: flex;
+  flex-direction: column;
   width: 100vw;
 }
 
-/* Base Box rules: All boxes draw their right and bottom borders */
-.b-cell {
-  border-right: 1px solid var(--brand-text);
-  border-bottom: 1px solid var(--brand-text);
+.plate {
+  min-height: var(--screen);
+  border-top: 1px solid var(--rule);
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  padding: 3rem;
-  height: 75vh;
-  position: relative;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Utility to remove padding for split-boxes (Colors, Typo, Mockups) */
-.b-cell.no-pad {
+.brand-plates > .plate:first-child {
+  border-top: none;
+}
+
+.plate.padded {
+  padding: var(--plate-y) var(--plate-x);
+}
+
+.plate.full-bleed {
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Generic media container. `.contain` = generous whitespace around the
+   artifact (hero lockup, logo meaning). `.cover` = fills the plate edge
+   to edge (applications, pattern). */
+.media {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.media img,
+.media svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.media.contain img,
+.media.contain svg {
+  object-fit: contain;
+}
+.media.cover img,
+.media.cover svg {
+  object-fit: cover;
+}
+
+/* ---------------------------------------------------
+   1 — HERO LOCKUP
+   Full lockup PNG, nothing else on screen.
+   --------------------------------------------------- */
+.plate-hero .media {
+  padding: 6vh 21vw 12vh 21vw;
+}
+
+/* ---------------------------------------------------
+   2 — INTRO (mark left, spec panel right)
+   --------------------------------------------------- */
+.plate-intro {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 6vw;
+  align-items: center;
+}
+.intro-media {
+  height: 50%;
+  width: 100%;
+}
+.intro-media .media {
+  padding: 0;
+}
+.intro-name {
+  font-size: clamp(5.4rem, 3.6vw, 3.4rem);
+  margin-bottom: 2.2rem;
+}
+.meta-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-bottom: 1.8rem;
+  margin-bottom: 1.8rem;
+  border-bottom: 1px solid var(--rule);
+}
+.meta-row {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  align-items: start;
+  gap: 1rem;
+}
+.meta-key {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  opacity: 0.5;
+}
+.meta-val {
+  font-size: 1rem;
+  font-weight: 400;
+}
+.meta-desc {
+  font-size: 1rem;
+  line-height: 1.65;
+  max-width: 46ch;
+  opacity: 0.85;
+}
+
+/* ---------------------------------------------------
+   3 — LOGO MEANING
+   --------------------------------------------------- */
+.plate-meaning .media {
+  padding: 10vh 15vw;
+}
+
+/* ---------------------------------------------------
+   4 — COLORS
+   Full-height swatch columns, spec text anchored to the bottom.
+   --------------------------------------------------- */
+.plate-colors {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  align-items: stretch;
+}
+.color-col {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 4vh 2.4vw;
+  border-left: 1px solid var(--rule);
+}
+.color-col:first-child {
+  border-left: none;
+}
+.color-name {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+.color-desc {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  opacity: 0.85;
+  max-width: 30ch;
+  margin-bottom: 1.4rem;
+}
+.color-codes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  opacity: 0.75;
+  padding-top: 0.6rem;
+}
+
+/* ---------------------------------------------------
+   5 — TYPOGRAPHY
+   Foundry-specimen style: large sample, then structured caption.
+   --------------------------------------------------- */
+.plate-type {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.type-col {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4vh 4vw;
+  border-left: 1px solid var(--rule);
+}
+.type-col:first-child {
+  border-left: none;
+}
+.type-specimen {
+  font-size: clamp(4.5rem, 9vw, 9rem);
+  line-height: 1;
+  margin-bottom: 3rem;
+}
+.type-caption {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.type-role {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  opacity: 0.55;
+}
+.type-name {
+  font-size: 1.1rem;
+}
+.type-sample {
+  font-size: 1.4rem;
+  margin-top: 0.6rem;
+  opacity: 0.9;
+}
+
+/* ---------------------------------------------------
+   6 — LOGO VERSATILITY
+   A comparison grid — each variant on its own card, generous inset.
+   --------------------------------------------------- */
+.plate-versatility {
+  min-height: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25vw, 1fr));
+}
+.versatility-card {
+  border-left: 1px solid var(--rule);
+  border-top: 1px solid var(--rule);
+  padding: 7.2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+}
+.versatility-card.on-dark {
+  background-color: var(--brand-text);
+}
+.versatility-card.on-light {
+  background-color: var(--brand-bg);
+}
+.versatility-card.on-white {
+  background-color: white;
+}
+.versatility-card.on-black {
+  background-color: black;
+}
+
+/* ---------------------------------------------------
+   7+ — APPLICATION PLATES (repeatable)
+   --------------------------------------------------- */
+.plate-application .media {
   padding: 0;
 }
 
-/* Utility to make a box span the whole page */
-.span-full {
-  grid-column: span 2;
-}
-
 /* ---------------------------------------------------
-   SPECIFIC BOX COMPONENTS
+   CLOSING
    --------------------------------------------------- */
-
-/* Image Box */
-.b-media-frame {
-  height: 100%;
-  width: 100%;
-  place-self: center;
-  overflow: hidden;
-  padding: var(--frame-padding, 0%);
-}
-.b-media-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: var(--img-fit, cover);
-}
-.b-media-frame svg {
-    width: 100%;
-    height: 100%;
-    object-fit: var(--img-fit, cover);
-}
-
-/*Section Titles */
-.section-title{
-    height: 2.8vh;
-    color: var(--brand-text);
-    background-color: var(--brand-bg);
-    display: flex;
-    align-items: center;
-    padding: 1.6rem 1.2rem;
-    border-bottom: 1px solid color-mix(in srgb, var(--brand-text) 40%, transparent);
-    font-family: var(--brand-font-body);
-    text-transform: uppercase;
-    font-size: 0.92rem;
-    font-weight: bolder;
-}
-
-/* Box: Intro */
-.cell-intro {
-  justify-content: center;
-}
-.intro-meta {
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.8rem;
-  font-weight: 600;
-  border-bottom: 1px solid var(--brand-text);
-  padding-bottom: 0.6rem;
-  display: inline-block;
-}
-.intro-title {
-  font-size: clamp(4rem, 8vw, 8rem);
-  margin: 1.4rem 0;
-}
-.intro-desc {
-  font-size: 0.8rem;
-  opacity: 85%;
-  max-width: 85%;
-}
-.wordmark{
-    height: fit-content;
-    width: fit-content;
-}
-
-/* Box: Colors (Flex Column Layout) */
-.color-pane {
-  flex: 1;
+.plate-closing {
+  min-height: auto;
+  padding: 6vh var(--plate-x);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 3rem;
-}
-.color-pane h3 {
-    font-size: 1.6rem;
-    padding-bottom: 0.4rem;
-    font-weight: bolder;
-    opacity: 90%;
-    letter-spacing: 2%;
-}
-.color-pane p{
-    font-size: 0.72rem;
-    opacity: 50%;
-    letter-spacing: 12%;
-    padding: 1.2vh 0;
-    font-weight: 600;
-}
-
-/* Box: Typography (Flex Row Split) */
-.type-split {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  width: 100%;
-}
-.type-pane {
-  flex: 1;
-  padding: 3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.type-pane p{
-    font-size: 0.6rem;
-    letter-spacing: 0.1rem;
-    font-weight: bolder;
-    opacity: 70%;
-    padding-bottom:0.4rem;
-}
-.type-heading{
-    font-size: 9.8vh;
-    margin-bottom: 6vh;
-    font-weight: 400;
-}
-.type-subheading{
-    font-size: 5.4vh;
-    font-weight: bolder;
-    margin-bottom: 6vh;
-    letter-spacing: 0.02rem;
-}
-.type-body{
-    width: 90%;
-    font-size: 2vh;
-    line-height: 1.2;
-    letter-spacing: 4%;
-    font-weight: normal;
-    opacity: 70%;
-}
-
-/* Final Box: Home CTA */
-.footer-cta {
-  border-bottom: none;
-  height: 2vh;
-  justify-content: center;
   align-items: center;
-  padding: 1.6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-weight: bold;
-  font-size: 0.8rem;
-  background-color: var(--brand-text);
-  color: var(--brand-bg);
-  cursor: pointer;
-  transition: opacity 0.3s;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
-.footer-cta:hover{
-    opacity: 0.9;
+.closing-note {
+  font-size: 0.95rem;
+  opacity: 0.7;
+  max-width: 40ch;
+}
+.closing-links {
+  display: flex;
+  gap: 2.4rem;
+}
+.closing-links a {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  position: relative;
+}
+.closing-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.3rem;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.closing-links a:hover::after {
+  transform: scaleX(1);
 }
 
-/* Brand Footer Customization */
+/* Brand footer stays quiet — no background of its own */
 .brand-footer {
   background-color: transparent !important;
+  border-top: 1px solid var(--rule);
 }
 
 /* ---------------------------------------------------
-   MOBILE OPTIMIZATION
+   MOBILE
    --------------------------------------------------- */
 @media screen and (max-width: 900px) {
-  .logo{
-    width: 70%;
+  :root {
+    --plate-x: 7vw;
+    --plate-y: 6vh;
   }
-  .brutalist-grid {
-    grid-template-columns: 1fr;
+
+  .show-desktop {
+    display: none !important;
   }
-  .b-cell {
-    height: 50vh;
+  .show-mobile {
+    display: block !important;
   }
-  .span-full {
-    grid-column: span 1;
-  }
+
   .nav-menu {
     background-image: none;
-    background-blend-mode: normal;
     filter: none;
   }
-  .type-heading{
-    font-size: 6vh;
+
+  .plate {
+    min-height: auto;
   }
-  .type-subheading{
-    font-size: 4vh;
+
+  .mobile-crop {
+    aspect-ratio: 5/4;
   }
-  .type-body{
-    font-size: 1.8vh;
+
+  .plate.padded {
+    padding: 8vh var(--plate-x);
   }
-  .b-cell:has(.type-pane){
-    height: fit-content;
+
+  .plate-hero .media {
+    padding: 6vh 8vw;
   }
-  .footer-cta{
-    height: 5vh;
+
+  .plate-intro {
+    grid-template-columns: 1fr;
+    gap: 4vh;
+  }
+  .intro-media {
+    height: 40vh;
+  }
+  .intro-name {
+    font-size: clamp(4rem, 3.6vw, 3.4rem);
+  }
+
+  .plate-intro .intro-media {
+    display: none !important;
+  }
+
+  .plate-meaning .media {
+    padding: 6vh 8vw;
+  }
+
+  .plate-colors {
+    grid-template-columns: 1fr;
+  }
+  .color-col {
+    border-left: none;
+    border-top: 1px solid var(--rule);
+    min-height: 40vh;
+    padding: 6vh 8vw;
+  }
+  .color-col:first-child {
+    border-top: none;
+  }
+
+  .plate-type {
+    grid-template-columns: 1fr;
+  }
+  .type-col {
+    border-left: none;
+    border-top: 1px solid var(--rule);
+    padding: 6vh 8vw;
+  }
+  .type-col:first-child {
+    border-top: none;
+  }
+  .type-specimen {
+    font-size: clamp(3.5rem, 16vw, 5rem);
+  }
+
+  .plate-versatility {
+    grid-template-columns: 1fr 1fr;
+  }
+  .versatility-card {
+    min-height: 30vh;
+    padding: 8vw;
+  }
+
+  .plate-closing {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

@@ -56,6 +56,19 @@ if (!window.matchMedia('(pointer: coarse)').matches) {
     document.addEventListener('mousemove', handleMouseMove);
   }
 
+const cursorLabel = cursor.querySelector('.cursor-label');
+
+document.querySelectorAll('[data-cursor-label]').forEach((el) => {
+  el.addEventListener('mouseenter', () => {
+    cursor.classList.add('cursor-active');
+    cursorLabel.textContent = el.getAttribute('data-cursor-label') || '';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.classList.remove('cursor-active');
+    cursorLabel.textContent = '';
+  });
+});
+
 //intro bars animation
 gsap.to(".line", 1.5,{
     delay: 0.5,
@@ -75,6 +88,24 @@ gsap.to(".line", 1.5,{
       });
     }
   })
+
+const revealEls = document.querySelectorAll('.reveal');
+if (revealEls.length) {
+    if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+
+        revealEls.forEach(el => revealObserver.observe(el));
+    } else {
+        revealEls.forEach(el => el.classList.add('is-visible'));
+    }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- Dynamic Splash Transition Logic ---
