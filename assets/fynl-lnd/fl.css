@@ -1,0 +1,66 @@
+/* ==========================================================================
+   MAKESHIFT TOKENS
+   ========================================================================== */
+
+@font-face {
+  font-family: "Helvetica";
+  src: url("Helvetica.woff2") format("woff2");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Helvetica Light";
+  src: url("Helvetica-Light.woff2") format("woff2");
+  font-style: normal;
+}
+
+:root {
+  /* Global Brand Identity */
+  --brand-bg: #f2eee4;
+  --brand-text: #000000;
+  --brand-font-heading: "Helvetica", sans-serif;
+  --brand-font-body: "Helvetica Light", sans-serif;
+
+  /* Box 4 Swatch Colors and their readable text counterparts */
+  --color-1: #f2eee4;
+  --color-1-text: #1a1a1a;
+
+  --color-2: #000000;
+  --color-2-text: #ffffff;
+
+  --color-3: #ffffff;
+  --color-3-text: #000000;
+}
+
+/* Ensure the page-load overlay lines match the brand */
+.line {
+  width: 100vw;
+  background: var(--brand-bg);
+}
+#custom-cursor {
+  mix-blend-mode: normal;
+  background-color: var(--brand-text);
+  opacity: 0.7;
+}
+#custom-cursor.cursor-active {
+  opacity: 1;
+  background-color: var(--brand-text);
+}
+#custom-cursor.cursor-active .cursor-label {
+  color: var(--brand-bg);
+}
+.brand-header a.nav-link {
+  letter-spacing: 0.15rem;
+}
+
+/* Mobile Menu Override */
+@media screen and (max-width: 768px) {
+  .brand-menu {
+    background-color: var(--brand-bg);
+    border-bottom: 1px solid var(--brand-text);
+  }
+
+  .plate-versatility-mobile {
+    grid-template-columns: 1fr;
+  }
+}
