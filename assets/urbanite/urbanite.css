@@ -1,0 +1,48 @@
+:root {
+    /* Global Brand Identity */
+    --brand-bg: #ffffff;
+    --brand-text: #000000;
+    --brand-font-heading: "Arial", sans-serif;
+    --brand-font-body: "Arial", sans-serif;
+
+    /* Box 4 Swatch Colors and their readable text counterparts */
+    --color-1: #D6D6D6;
+    --color-1-text: #1a1a1a;
+}
+
+/* Ensure the page-load overlay lines match the brand */
+.line {
+    width: 100vw;
+    background: var(--brand-bg);
+}
+
+#custom-cursor {
+    mix-blend-mode: normal;
+    background-color: var(--brand-text);
+    opacity: 0.7;
+}
+
+#custom-cursor.cursor-active {
+    opacity: 1;
+    background-color: var(--brand-text);
+}
+
+#custom-cursor.cursor-active .cursor-label {
+    color: var(--brand-bg);
+}
+
+.brand-header a.nav-link {
+    letter-spacing: 0.15rem;
+}
+
+/* Mobile Menu Override */
+@media screen and (max-width: 768px) {
+    .brand-menu {
+        background-color: var(--brand-bg);
+        border-bottom: 1px solid var(--brand-text);
+    }
+
+    .plate-versatility-mobile {
+        grid-template-columns: 1fr;
+    }
+}
