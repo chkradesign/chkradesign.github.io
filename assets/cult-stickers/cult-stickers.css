@@ -1,0 +1,54 @@
+/* ==========================================================================
+   Cult Stickers TOKENS
+   ========================================================================== */
+
+:root {
+  /* Global Brand Identity */
+  --brand-bg: #f5eab3;
+  --brand-text: #590b58;
+  --brand-font-heading: "Chewy", sans-serif;
+  --brand-font-body: "Quicksand", sans-serif;
+
+  /* Box 4 Swatch Colors and their readable text counterparts */
+  --color-1: #f63b4a;
+  --color-1-text: #f5eab3;
+
+  --color-2: #f5eab3;
+  --color-2-text: #f63b4a;
+
+  --color-3: #590b58;
+  --color-3-text: #f5eab3;
+}
+
+/* Ensure the page-load overlay lines match the brand */
+.line {
+  width: 100vw;
+  background: var(--brand-bg);
+}
+#custom-cursor {
+  mix-blend-mode: normal;
+  background-color: var(--brand-text);
+  opacity: 0.7;
+}
+#custom-cursor.cursor-active {
+  opacity: 1;
+  background-color: var(--brand-text);
+}
+#custom-cursor.cursor-active .cursor-label {
+  color: var(--brand-bg);
+}
+.brand-header a.nav-link {
+  letter-spacing: 0.15rem;
+}
+
+/* Mobile Menu Override */
+@media screen and (max-width: 768px) {
+  .brand-menu {
+    background-color: var(--brand-bg);
+    border-bottom: 1px solid var(--brand-text);
+  }
+
+  .plate-versatility-mobile {
+    grid-template-columns: 1fr;
+  }
+}
