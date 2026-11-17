@@ -1,14 +1,28 @@
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
-hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
-})
+function setMenuOpen(isOpen) {
+  if (!hamburger || !navMenu) return;
+  hamburger.classList.toggle('active', isOpen);
+  navMenu.classList.toggle('active', isOpen);
+  hamburger.setAttribute('aria-expanded', String(isOpen));
+}
+
+if (hamburger && navMenu) {
+  hamburger.addEventListener('click', () => {
+    setMenuOpen(!hamburger.classList.contains('active'));
+  });
+
+  hamburger.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      setMenuOpen(!hamburger.classList.contains('active'));
+    }
+  });
+}
 
 document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
-    hamburger.classList.remove("active");
-    navMenu.classList.remove("active");
+    setMenuOpen(false);
 }))
 
 const cursor = document.getElementById('custom-cursor');
@@ -18,8 +32,43 @@ let cursorX = 0;
 let cursorY = 0;
 const speed = 0.2;
 let cursorVisible = false;
+let mousePositionKnown = false;
+const cursorLabel = cursor?.querySelector('.cursor-label');
+let activeCursorLabelElement = null;
+let activeHoveredCard = null;
+let cursorLabelUpdateFrame = null;
+
+function updateCursorLabelFromPointer() {
+  if (!cursor || !cursorLabel || !mousePositionKnown) return;
+
+  const elementUnderPointer = document.elementFromPoint(mouseX, mouseY);
+  const labelElement = elementUnderPointer?.closest('[data-cursor-label]') || null;
+  const hoveredCard = elementUnderPointer?.closest('.card') || null;
+
+  if (hoveredCard !== activeHoveredCard) {
+    activeHoveredCard?.classList.remove('is-pointer-hovered');
+    hoveredCard?.classList.add('is-pointer-hovered');
+    activeHoveredCard = hoveredCard;
+  }
+
+  if (labelElement === activeCursorLabelElement) return;
+
+  activeCursorLabelElement = labelElement;
+  cursor.classList.toggle('cursor-active', Boolean(labelElement));
+  cursorLabel.textContent = labelElement?.getAttribute('data-cursor-label') || '';
+}
+
+function scheduleCursorLabelUpdate() {
+  if (cursorLabelUpdateFrame !== null) return;
+
+  cursorLabelUpdateFrame = requestAnimationFrame(() => {
+    cursorLabelUpdateFrame = null;
+    updateCursorLabelFromPointer();
+  });
+}
 
 function animate() {
+  if (!cursor) return;
   const distX = mouseX - cursorX;
   const distY = mouseY - cursorY;
 
@@ -35,6 +84,8 @@ function animate() {
 function handleMouseMove(e) {
   mouseX = e.clientX;
   mouseY = e.clientY;
+  mousePositionKnown = true;
+  updateCursorLabelFromPointer();
 
   if (!cursorVisible) {
     cursor.style.visibility = 'visible';
@@ -44,32 +95,30 @@ function handleMouseMove(e) {
 }
 
 // Mobile device check
-if (window.matchMedia('(pointer: coarse)').matches) {
+const hasCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+
+if (cursor && hasCoarsePointer) {
   // Mobile device, don't show custom cursor
   cursor.style.display = 'none';
-} else {
+} else if (cursor) {
   // Desktop device, add mousemove listener
   document.addEventListener('mousemove', handleMouseMove);
+
+  if (cursorLabel) {
+    // Recheck the hit target after viewport or nested-container scrolling.
+    window.addEventListener('scroll', scheduleCursorLabelUpdate, { passive: true });
+    document.addEventListener('scroll', scheduleCursorLabelUpdate, {
+      passive: true,
+      capture: true,
+    });
+  }
 }
 
-if (!window.matchMedia('(pointer: coarse)').matches) {
-    document.addEventListener('mousemove', handleMouseMove);
-  }
-
-const cursorLabel = cursor.querySelector('.cursor-label');
-
-document.querySelectorAll('[data-cursor-label]').forEach((el) => {
-  el.addEventListener('mouseenter', () => {
-    cursor.classList.add('cursor-active');
-    cursorLabel.textContent = el.getAttribute('data-cursor-label') || '';
-  });
-  el.addEventListener('mouseleave', () => {
-    cursor.classList.remove('cursor-active');
-    cursorLabel.textContent = '';
-  });
-});
-
 //intro bars animation
+const overlay = document.querySelector('.overlay');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (overlay && window.gsap && !reducedMotion) {
 gsap.to(".line", 1.5,{
     delay: 0.5,
     height: 0,
@@ -83,11 +132,14 @@ gsap.to(".line", 1.5,{
         opacity: 0,
         duration: 0.5,
         onComplete: () => {
-          document.querySelector(".overlay").style.display = "none";
+          overlay.style.display = "none";
         }
       });
     }
-  })
+  });
+} else if (overlay) {
+  overlay.style.display = 'none';
+}
 
 const revealEls = document.querySelectorAll('.reveal');
 if (revealEls.length) {
@@ -113,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     splashTriggers.forEach(trigger => {
         trigger.addEventListener('click', (e) => {
+            if (!trigger.href || !window.gsap || reducedMotion) return;
             // Prevent default navigation initially
             e.preventDefault();
             
@@ -142,4 +195,25 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+});
+
+window.addEventListener('pageshow', (event) => {
+    if (!event.persisted) return;
+
+    document.querySelectorAll('.splash-transition').forEach((splash) => splash.remove());
+    if (window.gsap) {
+        window.gsap.killTweensOf('.overlay, .line');
+    }
+    if (overlay) {
+        overlay.style.opacity = '0';
+        overlay.style.display = 'none';
+    }
+    document.querySelectorAll('.line').forEach((line) => {
+        line.style.height = '';
+    });
+    setMenuOpen(false);
+    cursor?.classList.remove('cursor-active');
+    if (cursorLabel) cursorLabel.textContent = '';
+    activeCursorLabelElement = null;
+    scheduleCursorLabelUpdate();
 });

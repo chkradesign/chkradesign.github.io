@@ -14,7 +14,7 @@ html {
   color: #f2f0ef;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  /* cursor: none; */
+  cursor: none;
 }
 
 body {
@@ -167,6 +167,11 @@ a {
 .hamburger {
   display: none;
   cursor: pointer;
+}
+
+.hamburger:focus-visible {
+  outline: 2px solid #f2f0ef;
+  outline-offset: 6px;
 }
 
 .bar {
@@ -334,7 +339,8 @@ a {
   left: 0;
 }
 
-.card:hover::before {
+.card:hover::before,
+.card.is-pointer-hovered::before {
   opacity: 1;
 }
 
@@ -349,7 +355,8 @@ a {
   text-align: center;
 }
 
-.card:hover > * {
+.card:hover > *,
+.card.is-pointer-hovered > * {
   opacity: 1;
   transform: scale(1);
 }
@@ -419,13 +426,22 @@ a {
   transform: translateY(0);
 }
 
-/* @media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
   .reveal {
     opacity: 1;
     transform: none;
     transition: none;
   }
-} */
+}
 
 /* ============================================================== */
 /* MOBILE OVERRIDES (Fully updated, leaving desktop untouched)    */
