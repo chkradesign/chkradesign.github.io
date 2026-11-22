@@ -217,3 +217,30 @@ window.addEventListener('pageshow', (event) => {
     activeCursorLabelElement = null;
     scheduleCursorLabelUpdate();
 });
+// Keep the favicon artwork in assets/chkra.svg and tint it from this page's
+// --brand-bg token. The static SVG link in each HTML head remains the fallback.
+(() => {
+    const favicon = document.querySelector('link[rel~="icon"]');
+    if (!favicon || !window.fetch) return;
+
+    const color = getComputedStyle(document.documentElement)
+        .getPropertyValue('--brand-bg')
+        .trim();
+    if (!color) return;
+
+    fetch(new URL('/assets/chkra.svg', document.baseURI))
+        .then((response) => {
+            if (!response.ok) throw new Error('Could not load favicon SVG');
+            return response.text();
+        })
+        .then((svg) => {
+            const tintedSvg = svg.replace(/fill="white"/i, `fill="${color}"`);
+            if (tintedSvg === svg) return;
+
+            favicon.type = 'image/svg+xml';
+            favicon.href = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(tintedSvg)}`;
+        })
+        .catch(() => {
+            // Keep the static favicon if fetching or tinting is unavailable.
+        });
+})();

@@ -21,6 +21,10 @@ body {
   background-color: #f2f0ef;
 }
 
+:root {
+  --brand-bg: #ffffff;
+}
+
 .noise {
   background-image: url("assets/slate.jpg");
   /* background-position: center; */
