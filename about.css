@@ -19,6 +19,8 @@
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.15em;
+  margin:0;
+  padding-top: 2.4rem;
 }
 
 .about-name {
@@ -34,6 +36,17 @@
   opacity: 0.72;
 }
 
+.hero-content h1 {
+  width: auto;
+  margin-right: 0vw;
+  margin-bottom: 2.4rem;
+}
+
+.hero-content p {
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+  width: auto;
+}
 
 /* ---------------------------------------------------
    ABOUT PHOTO
@@ -45,7 +58,7 @@
 
 .about-photo-frame img {
   width: 100%;
-  filter: grayscale(12%) contrast(105%);
+  /* filter: grayscale(12%) contrast(105%); */
 }
 
 /* ---------------------------------------------------
