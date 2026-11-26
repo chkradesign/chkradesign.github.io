@@ -3,7 +3,7 @@
    ========================================================================== */
 
 :root {
-  --brand-bg: tan;
+  --brand-bg: #FEBB8F;
 }
 
 /* ---------------------------------------------------
@@ -13,6 +13,10 @@
 .hero.about-hero {
   height: 84vh;
   gap: 8vw;
+}
+
+.hero{
+  align-items: center;
 }
 
 .about-hero .section-title {

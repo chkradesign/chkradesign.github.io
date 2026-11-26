@@ -151,6 +151,17 @@ if (overlay && window.gsap && !reducedMotion) {
 
 const revealEls = document.querySelectorAll(".reveal");
 if (revealEls.length) {
+  const showIfNearViewport = (el) => {
+    const rect = el.getBoundingClientRect();
+    const viewHeight =
+      window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top < viewHeight * 0.98 && rect.bottom > 0) {
+      el.classList.add("is-visible");
+      return true;
+    }
+    return false;
+  };
+
   if ("IntersectionObserver" in window) {
     const revealObserver = new IntersectionObserver(
       (entries) => {
@@ -161,12 +172,59 @@ if (revealEls.length) {
           }
         });
       },
-      { threshold: 0.16, rootMargin: "0px 0px -8% 0px" },
+      { threshold: 0.05, rootMargin: "0px 0px -2% 0px" },
     );
 
-    revealEls.forEach((el) => revealObserver.observe(el));
+    revealEls.forEach((el) => {
+      if (!showIfNearViewport(el)) {
+        revealObserver.observe(el);
+      }
+    });
   } else {
     revealEls.forEach((el) => el.classList.add("is-visible"));
+  }
+}
+
+if (hasCoarsePointer) {
+  const cards = document.querySelectorAll(".card");
+
+  const setActiveMobileCard = (targetCard) => {
+    cards.forEach((card) => {
+      card.classList.toggle("is-mobile-active", card === targetCard);
+    });
+  };
+
+  // 1. Touch / hold on a card triggers the hover animation immediately
+  cards.forEach((card) => {
+    card.addEventListener(
+      "touchstart",
+      () => {
+        setActiveMobileCard(card);
+      },
+      { passive: true },
+    );
+  });
+
+  // 2. Scrolling over a card brings it into focus in the middle band of the screen
+  if ("IntersectionObserver" in window && cards.length) {
+    const mobileScrollObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveMobileCard(entry.target);
+          } else {
+            entry.target.classList.remove("is-mobile-active");
+          }
+        });
+      },
+      {
+        // Triggers when a card passes through the middle ~40% of the viewport
+        rootMargin: "-30% 0px -30% 0px",
+        threshold: 0.2,
+      },
+    );
+
+    cards.forEach((card) => mobileScrollObserver.observe(card));
   }
 }
 
@@ -259,7 +317,7 @@ window.addEventListener("pageshow", (event) => {
 })();
 
 const header = document.querySelector(".home-header");
-const intro = document.querySelector(".hero .intro");
+const intro = document.querySelector(".hero-logo");
 const updateNavLogo = () => {
   if (header && intro)
     header.classList.toggle(

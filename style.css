@@ -2,7 +2,6 @@
   display: none;
 }
 
-/* Added scroll-padding-top so clicking 'Work' anchors correctly below the sticky nav */
 html {
   scroll-padding-top: 18vh;
 }
@@ -10,11 +9,10 @@ html {
 * {
   padding: 0;
   margin: 0;
-  font-family: "Outfit", sans-serif;
+  font-family: "Google Sans Flex", sans-serif;
   color: #f2f0ef;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  /* cursor: none; */
 }
 
 body {
@@ -22,12 +20,11 @@ body {
 }
 
 :root {
-  --brand-bg: #ffffff;
+  --brand-bg: #f2f0ef;
 }
 
 .noise {
   background-image: url("assets/slate.jpg");
-  /* background-position: center; */
   background-size: cover;
   background-blend-mode: hard-light;
   filter: brightness(110%) contrast(100%);
@@ -71,8 +68,6 @@ body {
     opacity 0.25s ease;
 }
 
-/* Hover state: signals "this is clickable" without abandoning the blob identity.
-   Grows, squares off into a clean circle, and reveals a short word. */
 #custom-cursor .cursor-label {
   opacity: 0;
   font-size: 0.6rem;
@@ -93,14 +88,12 @@ body {
   mix-blend-mode: normal;
   background-color: #f2f0ef;
   transform: translate(-50%, -50%) rotate(0deg);
-  /* transform: translate(-50%, -50%) rotate(0deg); */
 }
 
 #custom-cursor.cursor-active .cursor-label {
   opacity: 1;
 }
 
-/* Sticky Header styling */
 header {
   position: sticky;
   top: 0;
@@ -111,7 +104,6 @@ header {
     border-bottom 0.3s ease;
 }
 
-/* Class added by JS when scrolling to separate it from the content */
 header.scrolled {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   border-bottom: 1px solid rgba(242, 240, 239, 0.05);
@@ -142,11 +134,11 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 4vw;
+  padding: 0 2.8vw;
 }
 
 .nav-logo {
-  height: 36px;
+  height: 32px;
 }
 
 .nav-menu {
@@ -193,83 +185,59 @@ a {
 .bar {
   display: block;
   width: 8vw;
-  height: 0.4vh;
-  margin: 1.2vh auto;
+  height: 0.32vh;
+  margin: 1vh auto;
   background-color: #f2f0ef;
   transition: all 0.3s ease-in-out;
   border-radius: 100px;
 }
 
-/* Hero Section */
 .hero {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  /* Explicitly left aligned */
-  padding: 0 4vw;
+  padding: 0 2.8vw;
   width: 100vw;
-  height: 81vh;
-  /* 81vh + 16vh nav = 95vh. Leaves 5vh for sliver of the next section */
   background-color: #1a1a1a;
   position: relative;
   box-sizing: border-box;
 }
 
-.hero-content {
-  color: #f2f0ef;
-  z-index: 2;
+.intro h1 {
+  font-size: 7.2vw;
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: 0.2rem;
+  margin: 4vh 0 12vh 0;
+  opacity: 0.88;
 }
 
-.intro {
-  display: flex;
-  align-items: center;
-  /* Better alignment for text + logo */
-  gap: 0.8rem;
-  margin-top: 2.8rem;
-  opacity: 0.7;
-}
-
-.hero-content h1 {
-  /* font-size: 6rem; */
-  font-size: 6vw;
-  width: 88vw;
-  font-weight: 700;
-  line-height: 1;
-  margin-right: 20vw;
-  margin-bottom: 4rem;
-  margin-top: 4rem;
-  letter-spacing: 0.04em;
+.intro h1 bold {
+  font-weight: 800;
+  letter-spacing: 0.2rem;
 }
 
 .hero-logo {
-  height: 2.2rem;
-  transform: translateY(8.4%);
-}
-
-.hero-content h2 {
-  font-size: 2.1rem;
-  font-weight: 300;
-  letter-spacing: 0.06rem;
+  height: 5.4vw;
 }
 
 .hero-content p {
-  /* font-size: 1.42rem; */
-  font-size: 1.6vw;
+  font-size: 1.2rem;
   font-weight: 300;
+  margin-top: 3.2rem;
   letter-spacing: 0.06em;
   opacity: 0.8;
-  width: 64vw;
+  width: 72vw;
 }
 
 .scroll-arrow {
   display: none;
 }
 
-/* Center wrapper layout */
 .circular-text-container {
   position: absolute;
   bottom: 10vh;
-  right: 6vw;
+  right: 2.8vw;
   z-index: 3;
   display: flex;
   align-items: center;
@@ -279,9 +247,8 @@ a {
   opacity: 0.7;
 }
 
-/* SVG dimensions and spinning trigger */
 .rotating-svg {
-  height: 25vh;
+  width: 12vw;
   animation: spin 12s linear infinite;
   font-size: 1rem;
   font-weight: normal;
@@ -289,25 +256,19 @@ a {
   pointer-events: none;
 }
 
-/* The new arrow element, untouched parent/SVG */
 .center-arrow {
   position: absolute;
-  width: 5vh;
-  height: 5vh;
-  border-right: 6px solid #1a1a1a;
-  border-bottom: 6px solid #1a1a1a;
+  width: 3.2vh;
+  height: 3.2vh;
+  border-right: 4px solid #1a1a1a;
+  border-bottom: 4px solid #1a1a1a;
   opacity: 0.8;
-
-  /* Centers the arrow perfectly relative to the container */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -60%) rotate(45deg);
-
-  /* Ensures the arrow doesn't block the link from being clicked */
   pointer-events: none;
 }
 
-/* Seamless 360-degree loop */
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -319,35 +280,58 @@ a {
 }
 
 /* Work Section */
+.work-section {
+  padding: 2vh 1vw;
+  background-color: #f2f0ef;
+}
+
 .section-title {
-  /* color: #F2F0EF; Corrected to fit dark mode, previously inline #1a1a1a */
   color: #1a1a1a;
-  margin: 4vh 4vw 0 4vw;
-  letter-spacing: 0.1em;
-  font-weight: 600;
+  margin: 0 0 2vh 0;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 }
 
 .grid {
-  margin: 2rem 4vw;
+  margin: 0;
+  padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
-  gap: 2.6rem;
-  justify-content: center;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1vw;
+  row-gap: 4vh;
+  width: 100%;
+}
+
+.grid>a {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  text-decoration: none;
 }
 
 .card {
-  height: 400px;
-  padding: 2em;
-  border-radius: 1rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-  gap: 3rem;
-  transition: transform 0.5s ease;
+  height: 100%;
+  border-radius: 0;
   overflow: hidden;
   position: relative;
   cursor: none;
+  background-color: transparent;
+}
+
+.card-media {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #e6e3e0;
 }
 
 .card-image {
@@ -357,64 +341,69 @@ a {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  z-index: 0;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.card::before {
+.card:hover .card-image,
+.card.is-pointer-hovered .card-image {
+  transform: scale(1.025);
+}
+
+.card-media::before {
   content: "";
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.58);
   z-index: 1;
   pointer-events: none;
-  transition: opacity 0.5s ease;
   opacity: 0;
-  border-radius: 1rem;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
+  transition: opacity 0.35s ease;
 }
 
-.card:hover::before,
-.card.is-pointer-hovered::before {
+.card:hover .card-media::before,
+.card.is-pointer-hovered .card-media::before {
   opacity: 1;
 }
 
-.card> :not(.card-image) {
+.card-logo {
+  position: relative;
   z-index: 2;
-  transform: scale(1.2);
+  max-height: 110px;
+  max-width: 60%;
+  width: auto;
   opacity: 0;
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
-  color: white;
-  text-align: center;
+  transform: scale(1.08);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
 }
 
-.card>.card-image {
-  z-index: 0;
-  transform: none;
-  opacity: 1;
-  transition: none;
-}
-
-.card:hover> :not(.card-image),
-.card.is-pointer-hovered> :not(.card-image) {
+.card:hover .card-logo,
+.card.is-pointer-hovered .card-logo {
   opacity: 1;
   transform: scale(1);
 }
 
-.card h2 {
+.card-meta {
+  padding: 0.6rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.card-meta h2 {
+  color: #1a1a1a;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.card-meta p {
+  color: #1a1a1a;
+  font-size: 0.8rem;
   font-weight: 400;
-  letter-spacing: 0.1em;
+  opacity: 0.72;
 }
 
-.card p {
-  font-weight: 300;
-  letter-spacing: 0.1em;
-}
-
-/* Footer */
 .footer {
   padding: 4vh 0;
   background-color: #1a1a1a;
@@ -441,7 +430,6 @@ a {
   transform: scale(1.1);
 }
 
-/* Page Transition Splash Screen */
 .splash-transition {
   position: fixed;
   width: 20px;
@@ -450,12 +438,8 @@ a {
   transform: translate(-50%, -50%) scale(0);
   z-index: 99999;
   pointer-events: none;
-  /* Background color gets assigned in JS dynamically based on the brand */
 }
 
-/* ============================================================== */
-/* SHARED REVEAL UTILITY (used on brand pages + About/Contact)     */
-/* ============================================================== */
 .reveal {
   opacity: 0;
   transform: translateY(18px);
@@ -487,14 +471,66 @@ a {
   }
 }
 
-/* ============================================================== */
-/* MOBILE OVERRIDES (Fully updated, leaving desktop untouched)    */
-/* ============================================================== */
-
 @media screen and (max-width: 900px) {
+  .nav-link::after {
+    display: none;
+  }
+
+  .hero {
+    height: auto;
+    padding-bottom: 12vh;
+  }
+
+  .intro h1 {
+    font-size: 6.4vw;
+    width: 92vw;
+    line-height: 1.2;
+    margin-bottom: 8vh;
+  }
+
+  .hero-logo {
+    height: 5.4vw;
+    margin-right: 0;
+    transform: translateY(0.08em) translateX(0.08em);
+  }
+
+  .hero-content p {
+    font-size: 4.2vw;
+    width: 84vw;
+    letter-spacing: 0.04rem;
+    margin: 0;
+  }
+
+  .rotating-svg {
+    width: 16vw;
+  }
+
+  .work-section {
+    padding: 4.5vh 6vw 8vh;
+  }
+
+  .card-media {
+    height: 34vh;
+  }
+
+  .card:hover .card-media::before,
+  .card.is-pointer-hovered .card-media::before,
+  .card.is-mobile-active .card-media::before {
+    opacity: 1;
+  }
+
+  .card:hover .card-logo,
+  .card.is-pointer-hovered .card-logo,
+  .card.is-mobile-active .card-logo {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media screen and (max-width: 600px) {
   .navbar {
-    padding: 0 6vw;
-    min-height: 12vh;
+    padding: 0 3vw;
+    min-height: 8vh;
   }
 
   .hamburger {
@@ -506,17 +542,17 @@ a {
   }
 
   .hamburger.active .bar:nth-child(1) {
-    transform: translateY(1.6vh) rotate(45deg);
+    transform: translateY(1.3vh) rotate(45deg);
   }
 
   .hamburger.active .bar:nth-child(3) {
-    transform: translateY(-1.6vh) rotate(-45deg);
+    transform: translateY(-1.3vh) rotate(-45deg);
   }
 
   .nav-menu {
     position: fixed;
     left: -100%;
-    top: 12vh;
+    top: 8vh;
     gap: 0;
     flex-direction: column;
     background-color: #1a1a1a;
@@ -527,7 +563,7 @@ a {
     width: 100%;
     text-align: center;
     transition: 0.3s ease-in-out;
-    padding-bottom: 6vh;
+    /* padding-bottom: 6vh; */
     border-bottom: 1px solid rgba(242, 240, 239, 0.05);
   }
 
@@ -539,105 +575,37 @@ a {
     left: 0;
   }
 
-  .nav-link::after {
-    display: none;
-  }
-
   .nav-logo {
     height: 3.2vh;
   }
 
-  /* Hero section fixed for mobile alignment */
-  .hero {
-    height: auto;
-    padding-bottom: 12vh;
-    /* align-items: flex-start; */
+  .grid {
+    grid-template-columns: 1fr;
+    row-gap: 4.5vh;
   }
 
-  /* .hero-content {
-    max-width: 100%;
-  } */
-
-  .intro {
-    margin-top: 1.2rem;
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* Forces elements to break clean onto separate rows */
-    /* align-items: flex-start; */
+  .intro h1 {
+    font-size: 9.6vw;
+    /* margin: 12vh 0; */
   }
 
-  .hero-content h1 {
-    /* font-size: 3rem; */
-    font-size: 16vw;
-    width: 88vw;
-    letter-spacing: 0.04rem;
-    line-height: 1.04;
-    margin-bottom: 2.8rem;
-    margin-top: 1.6rem;
+  .hero{
+    padding-bottom: 4vh;
   }
 
-  /* Reset logo transform for mobile so it doesn't float off the edge */
   .hero-logo {
-    max-width: 72px;
-    margin: 0;
-    transform: translateY(5.4%) translateX(-12%);
+    height: 8.4vw;
   }
 
-  .hero-content h2 {
-    font-size: 1.2rem;
-    letter-spacing: 0.04rem;
-    margin: 0;
+  .rotating-svg {
+    width: 28vw;
   }
 
-  .hero-content p {
-    /* font-size: 1rem; */
-    font-size: 4.2vw;
-    width: 84vw;
-    letter-spacing: 0.04rem;
-    margin: 0;
-  }
-
-  .scroll-arrow {
-    display: flex !important;
-    position: absolute;
-    bottom: 5vh;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .arrow {
-    width: 2.4vh;
-    height: 2.4vh;
-    border-right: 4px solid #f2f0ef;
-    border-bottom: 4px solid #f2f0ef;
-    transform: rotate(45deg);
+  .desktop-break {
+    display: none;
   }
 
   .circular-text-container {
     display: none !important;
-  }
-
-  /* Work section */
-  .card {
-    height: 50vh;
-    /* Slightly shorter on small screens */
-  }
-
-  .card::before {
-    opacity: 0.7;
-    /* Permanent semi-transparent overlay so white text is readable */
-  }
-
-  .card> :not(.card-image) {
-    opacity: 1;
-    /* Keep text permanently visible on mobile since hover doesn't exist */
-    transform: scale(1);
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .grid {
-    grid-template-columns: 1fr;
-    margin: 2rem 6vw;
   }
 }
